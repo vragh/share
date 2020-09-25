@@ -9,6 +9,7 @@ rm(list = ls())
 
 
 mypath <- getwd()
+mypath <- "/home/owner/Downloads"
 inpfile <- "example.csv"
 
 inpdat <- read.table(paste0(mypath, "/", inpfile), sep = "\t", header = TRUE)
@@ -27,10 +28,13 @@ for(i in 1:length(unique(inpdat$type))){
   }
   
 }
-#dd[with(dd, order(-z, b)), ]
+
 
 outdat <- outdat[with(outdat, order(type_count)), ]
 outdat <- outdat[ , 1:3]
 
+#Writing the output
 write.table(outdat, paste0(getwd(), "/", sub("\\.csv", "", inpfile, perl = TRUE), "_fixed.csv"), 
             row.names = FALSE, quote = FALSE, sep = "\t")
+
+rm(inpdat, outdat, curdat, i, inpfile, mypath, type_count)
